@@ -1,11 +1,9 @@
 <div id="video-card" style="max-width: 720px; margin: 2rem auto; font-family: 'Segoe UI', sans-serif; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); background-color: #fff;">
-  <!-- fallback 默认显示 -->
+  <!-- Fallback thumbnail for browsers that don't support autoplay -->
   <a id="fallback-link" href="https://youtu.be/T76AhqQBzvI" target="_blank" style="text-decoration: none; color: inherit;">
     <div style="position: relative;">
-      <img src="https://img.youtube.com/vi/T76AhqQBzvI/0.jpg" alt="YouTube 视频封面" style="width: 100%; display: block;">
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                  background-color: rgba(0, 0, 0, 0.6); color: white; padding: 12px 24px; border-radius: 6px;
-                  font-size: 18px; font-weight: 500;">▶ 点击观看视频</div>
+      <img src="https://img.youtube.com/vi/T76AhqQBzvI/0.jpg" alt="YouTube Video Thumbnail" style="width: 100%; display: block;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.6); color: white; padding: 12px 24px; border-radius: 6px; font-size: 18px; font-weight: 500;">▶ 点击观看视频</div>
     </div>
   </a>
 </div>
@@ -16,22 +14,22 @@
     const fallback = document.getElementById('fallback-link');
     const videoId = 'T76AhqQBzvI';
 
-    // 创建 iframe 试试能不能嵌入
+    // Create the iframe element
     const iframe = document.createElement('iframe');
-    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&enablejsapi=1`;
     iframe.width = "100%";
     iframe.height = "400";
     iframe.style.border = "none";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     iframe.allowFullscreen = true;
 
-    // 如果加载成功，说明允许嵌入
+    // Check if the iframe can be embedded
     iframe.onload = () => {
-      wrapper.innerHTML = "";
-      wrapper.appendChild(iframe);
+      wrapper.innerHTML = ""; // Clear the wrapper
+      wrapper.appendChild(iframe); // Append the iframe
     };
 
-    // 插入 iframe，立即加载测试
+    // Append the iframe immediately to test if it can load
     wrapper.appendChild(iframe);
   })();
 </script>
