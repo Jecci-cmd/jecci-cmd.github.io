@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Jecci's Cool Video</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 50px;
-      background: #f0f0f0;
-    }
-    iframe {
-      border: none;
-      width: 80%;
-      height: 450px;
-      max-width: 800px;
-    }
-  </style>
-</head>
-<body>
-  <h1>oop作业</h1>
-  <p></p>
-  <iframe src="https://youtu.be/8sEB8ykyLKQ" allowfullscreen></iframe>
-</body>
-</html>
+<div id="video-card" style="max-width: 720px; margin: 2rem auto; font-family: sans-serif; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+  <!-- 默认是嵌入失败 fallback 模式 -->
+  <a id="fallback-link" href="https://youtu.be/8sEB8ykyLKQ" target="_blank" style="text-decoration: none; color: inherit;">
+    <div style="position: relative;">
+      <img src="https://img.youtube.com/vi/8sEB8ykyLKQ/0.jpg" alt="YouTube 视频封面" style="width: 100%; display: block;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                  background-color: rgba(0, 0, 0, 0.6); color: white; padding: 12px 24px; border-radius: 6px;
+                  font-size: 18px;">点击观看视频</div>
+    </div>
+  </a>
+</div>
+
+<script>
+  (function() {
+    const wrapper = document.getElementById('video-card');
+    const fallback = document.getElementById('fallback-link');
+
+    // 尝试创建 iframe 并测试能否加载
+    const iframe = document.createElement('iframe');
+    iframe.src = "https://www.youtube.com/embed/8sEB8ykyLKQ";
+    iframe.width = "100%";
+    iframe.height = "400";
+    iframe.style.border = "none";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+
+    iframe.onload = () => {
+      // 说明可以加载，替换 fallback
+      wrapper.innerHTML = "";
+      wrapper.appendChild(iframe);
+    };
+
+    iframe.onerror = () => {
+      console.warn("YouTube 嵌入失败，使用 fallback 封面展示。");
+    };
+
+    // 加载 iframe 试试看
+    wrapper.appendChild(iframe);
+  })();
+</script>
